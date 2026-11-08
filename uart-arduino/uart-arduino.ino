@@ -7,62 +7,21 @@ ArduinoLEDMatrix matrix;
 void setup() {
   Serial.begin(115200);
   matrix.begin();
-  matrix.renderBitmap(happy, 8, 12);
-
-
+  matrix.renderBitmap(frameHappy, 8, 12);
 }
 
 void loop() {
   
-  matrix.renderBitmap(happy, 8, 12);
+  matrix.renderBitmap(frameHappy, 8, 12); // waiting display
+  
   if(Serial.available()){
     int n=Serial.parseInt();
-    switch(n){
-     case 0:
-        matrix.renderBitmap(frame0, 8, 12);
-        delay(1000);
-        break;
-     case 1:
-        matrix.renderBitmap(frame1, 8, 12);
-        delay(1000);
-        break;
-     case 2:
-        matrix.renderBitmap(frame2, 8, 12);
-        delay(1000);
-        break;
-     case 3:
-        matrix.renderBitmap(frame3, 8, 12);
-        delay(1000);
-        break;
-     case 4:
-        matrix.renderBitmap(frame4, 8, 12);
-        delay(1000);
-        break;
-     case 5:
-        matrix.renderBitmap(frame5, 8, 12);
-        delay(1000);
-        break;
-     case 6:
-        matrix.renderBitmap(frame6, 8, 12);
-        delay(1000);
-        break;
-     case 7:
-        matrix.renderBitmap(frame7, 8, 12);
-        delay(1000);
-        break;
-     case 8:
-        matrix.renderBitmap(frame8, 8, 12);
-        delay(1000);
-        break;
-     case 9:
-        matrix.renderBitmap(frame9, 8, 12);
-        delay(1000);
-        break;
-     default:
-        Serial.print("envoie un chiffre entre 0 et 9\n");
-        matrix.renderBitmap(sad, 8, 12);
-        delay(1000);
-        break; 
-  }
+    if(n>=0 && n<=9){
+      matrix.renderBitmap(digitFrames[n], 8, 12); // display digit n on the LED matrix
+      delay(1000);
+    } else {
+      matrix.renderBitmap(frameSad, 8, 12);
+      delay(1000);
+    }
  }
 }
