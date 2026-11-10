@@ -1,0 +1,12 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Arduino IDE / build artifacts
+.build/
+*.hex
+
+# Éditeur / système
+*.swp
+.DS_Store
